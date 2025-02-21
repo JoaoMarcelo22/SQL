@@ -50,7 +50,7 @@ b) Faça uma adaptação no exercício anterior e mostre os Top 10 produtos com mais
 --group by
 --	ProductKey
 --having
---	sum(SalesAmount) > 5000000
+--	sum(SalesAmount) >= 5000000
 --order by 
 --	[Total vendido]
 
@@ -69,9 +69,21 @@ a) Você deve fazer uma consulta à tabela FactOnlineSales e descobrir qual é o ID
 b) Feito isso, faça um agrupamento de total vendido (SalesQuantity) por ID do produto e descubra quais foram os top 3 produtos mais comprados pelo cliente da letra a).
 */
 
-select
-	top(1) SalesQuantity,
-	CustomerKey as 'ID'
+-- ID produto na realidade é o cliente ID:19037
+
+--select
+--	CustomerKey as 'ID Produto',
+--	Sum(SalesQuantity) as 'Total Vendido'
+--from
+--	FactOnlineSales
+--group by CustomerKey
+--order by Sum(SalesQuantity) desc
+
+select top(3)
+	ProductKey as 'ID Produto',
+	Sum(SalesQuantity) as 'Total Vendido'
 from
 	FactOnlineSales
-order by SalesQuantity desc
+where CustomerKey = 19037
+group by ProductKey
+order by Sum(SalesQuantity) desc

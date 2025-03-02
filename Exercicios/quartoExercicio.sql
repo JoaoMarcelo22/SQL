@@ -86,4 +86,113 @@ from
 	FactOnlineSales
 where CustomerKey = 19037
 group by ProductKey
-order by Sum(SalesQuantity) desc
+order by [Total Vendido] desc
+
+/*
+4. 
+a) Faça um agrupamento e descubra a quantidade total de produtos por marca.
+b) Determine a média do preço unitário (UnitPrice) para cada ClassName.
+c) Faça um agrupamento de cores e descubra o peso total que cada cor de produto possui.
+*/
+
+--select  --A
+--	BrandName,
+--	count(BrandName) as 'Total Produto'
+--from
+--	DimProduct
+--group by BrandName
+--order by [Total Produto] desc
+
+--select  --B
+--	ClassName,
+--	avg(UnitPrice) as 'Media do preço por produto'
+--from
+--	DimProduct
+--group by ClassName
+--order by [Media do preço por produto] desc
+
+--select
+--	ColorName,
+--	sum(Weight) as 'Peso total'
+--from 
+--	DimProduct
+--group by ColorName
+--order by [Peso total] desc
+
+/*
+5. Você deverá descobrir o peso total para cada tipo de produto (StockTypeName).
+A tabela final deve considerar apenas a marca ‘Contoso’ e ter os seus valores classificados em ordem decrescente.
+*/
+
+--select
+--	StockTypeName,
+--	sum(Weight) as 'Peso total'
+--from 
+--	DimProduct
+--where
+--	BrandName = 'Contoso'
+--group by StockTypeName
+--order by [Peso total] desc
+
+/*
+6. Você seria capaz de confirmar se todas as marcas dos produtos possuem à disposição todas as 16 opções de cores?
+*/
+select
+	BrandName,
+	count( distinct ColorName) as 'Cores totais'
+from
+	DimProduct
+group by BrandName
+order by [Cores totais] desc
+
+/*
+7. Faça um agrupamento para saber o total de clientes de acordo com o Sexo e também a média salarial de acordo com o Sexo. Corrija qualquer resultado “inesperado” com os seus conhecimentos em SQL.
+*/
+
+select 
+	Gender,
+	count(Gender) as 'Total de clientes',
+	avg(YearlyIncome) as 'Media salarial'
+from
+	DimCustomer
+where Gender is not null
+group by Gender
+order by [Media salarial]
+
+/*
+8. Faça um agrupamento para descobrir a quantidade total de clientes e a média salarial de acordo com o seu nível escolar. Utilize a coluna Education da tabela DimCustomer para fazer esse agrupamento.
+*/
+select 
+	Education,
+	count(CustomerKey) as 'Total de clientes',
+	avg(YearlyIncome) as 'Media salarial'
+from
+	DimCustomer
+where Education is not null
+group by Education
+order by [Media salarial]
+
+/*
+9. Faça uma tabela resumo mostrando a quantidade total de funcionários de acordo com o Departamento (DepartmentName). Importante: Você deverá considerar apenas os funcionários ativos.
+*/
+
+select
+	DepartmentName,
+	count(EmployeeKey) as 'Total de funcionario'
+from
+	DimEmployee
+where Status is not null
+group by DepartmentName
+order by [Total de funcionario]
+
+/*
+10. Faça uma tabela resumo mostrando o total de VacationHours para cada cargo (Title). Você deve considerar apenas as mulheres, dos departamentos de Production, Marketing, Engineering e Finance, para os funcionários contratados entre os anos de 1999 e 2000.
+*/
+select
+	Title,
+	sum(VacationHours) as 'Total de funcionario'
+from
+	DimEmployee
+where Gender = 'F' and DepartmentName in ('Production','Marketing','Engineering','Finance') and HireDate between '1999-01-01' and '2000-12-31' 
+group by Title
+order by [Total de funcionario]

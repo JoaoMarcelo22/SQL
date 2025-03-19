@@ -45,8 +45,6 @@ A organização do repositório segue a seguinte estrutura:
 
 Aqui está uma tabela com os principais comandos SQL e suas respectivas descrições:
 
-# Comandos SQL Categorizados
-
 ## Seleção de Dados
 | Comando | Descrição | Exemplo |
 |---------|-----------|---------|

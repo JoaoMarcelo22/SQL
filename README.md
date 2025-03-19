@@ -123,6 +123,7 @@ Aqui está uma tabela com os principais comandos SQL e suas respectivas descriç
 | `DATEFROMPARTS` | Cria uma data a partir de ano, mês e dia | `SELECT DATEFROMPARTS(2023, 12, 25);` |
 | `DATEADD` | Adiciona um intervalo a uma data | `SELECT DATEADD(DAY, 10, GETDATE());` |
 | `DATEDIFF` | Retorna a diferença entre duas datas | `SELECT DATEDIFF(DAY, '2023-01-01', '2023-12-31');` |
+| `FORMAT`   | Formata um valor para exibição | `SELECT FORMAT(GETDATE(), 'dd/MM/yyyy');`|
 
 ---
 

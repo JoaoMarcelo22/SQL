@@ -86,6 +86,7 @@ Aqui está uma tabela com os principais comandos SQL e suas respectivas descriç
 | `INSERT` | Insere novos registros na tabela | `INSERT INTO produtos (nome, preco) VALUES ('Mouse', 50);` |
 | `UPDATE` | Atualiza registros existentes | `UPDATE produtos SET preco = 60 WHERE nome = 'Mouse';` |
 | `DELETE` | Remove registros de uma tabela | `DELETE FROM produtos WHERE preco < 10;` |
+| `CAST`| Converte um tipo de dado para outro | `SELECT CAST(123.45 AS INT);`|
 
 ## Estruturas e Modificação de Tabelas
 | Comando | Descrição | Exemplo |

@@ -1,11 +1,10 @@
 # 📌 Repositório de Aprendizado em SQL
 
-Bem-vindo ao **Repositório de Aprendizado em SQL**! Aqui você encontrará diversos materiais para aprimorar suas habilidades em SQL, incluindo:
+Bem-vindo ao **Repositório de Aprendizado em SQL**! 
 
-✅ **Exercícios práticos** para treinar suas consultas.
-✅ **PDFs explicativos** sobre teoria e melhores práticas.
-✅ **Tabelas e comandos SQL** organizados para facilitar a consulta.
-✅ **Casos práticos** baseados em cenários do mundo real.
+✅ **Exercícios práticos**.
+✅ **PDFs explicativos**.
+✅ **Tabelas e comandos SQL**.
 
 ---
 
@@ -21,15 +20,11 @@ A organização do repositório segue a seguinte estrutura:
 │   ├── intermediario.sql
 │   ├── avancado.sql
 │   └── desafios.sql
-├── 📂 Materiais  # PDFs com teoria e dicas
-│   ├── fundamentos_sql.pdf
-│   ├── joins_relacoes.pdf
-│   ├── performance_otimizacao.pdf
-│   └── modelagem_dados.pdf
-└── 📂 Exemplos  # Casos práticos e consultas comentadas
-    ├── analise_vendas.sql
-    ├── relatorio_clientes.sql
-    └── dashboard_financeiro.sql
+├── 📂 Materiais  # PDFs com teoria,dicas,Casos práticos e consultas comentadas
+    ├── fundamentos_sql.pdf
+    ├── joins_relacoes.pdf
+    ├── performance_otimizacao.pdf
+    └── modelagem_dados.pdf
 ```
 
 ---

@@ -44,6 +44,44 @@ A organização do repositório segue a seguinte estrutura:
 ## 📖 Comandos SQL Essenciais
 
 Aqui está uma tabela com os principais comandos SQL e suas respectivas descrições:
+## Comandos SQL e Exemplos
+
+| Comando | Descrição | Exemplo |
+|---------|-----------|---------|
+| **CASE WHEN THEN ELSE** | Cria uma estrutura condicional | `SELECT clientesName, CASE WHEN idade >= 18 THEN 'Adulto' ELSE 'Menor' END AS faixa_etaria FROM clientes;` |
+| **CASE ADITIVO** | Verifica múltiplas condições sem `WHEN` repetido | `SELECT categoria, CASE categoria WHEN 'A' THEN 'Alta' WHEN 'B' THEN 'Média' ELSE 'Baixa' END AS prioridade FROM pedidos;` |
+| **CASE ANINHADO** | Um `CASE` dentro de outro `CASE` | `SELECT nome, CASE WHEN salario > 5000 THEN 'Alto' WHEN salario BETWEEN 3000 AND 5000 THEN CASE WHEN tempo_servico > 5 THEN 'Médio-Alto' ELSE 'Médio' END ELSE 'Baixo' END AS classificacao FROM funcionarios;` |
+| **IIF** | Alternativa ao `CASE`, retorna um valor baseado em uma condição (SQL Server) | `SELECT IIF(idade >= 18, 'Adulto', 'Menor') AS faixa_etaria FROM clientes;` |
+| **IIF COMPOSTO** | `IIF` com múltiplas condições encadeadas | `SELECT IIF(idade >= 60, 'Idoso', IIF(idade >= 18, 'Adulto', 'Menor')) AS faixa_etaria FROM clientes;` |
+| **ISNULL** | Substitui valores `NULL` por um padrão | `SELECT nome, ISNULL(email, 'Sem Email') AS email_corrigido FROM clientes;` |
+| **LEN** | Retorna o número de caracteres em uma string | `SELECT LEN(nome) AS tamanho_nome FROM clientes;` |
+| **DATALENGTH** | Retorna o tamanho da string em bytes | `SELECT DATALENGTH(nome) AS bytes_nome FROM clientes;` |
+| **CONCAT** | Concatena strings | `SELECT CONCAT(nome, ' ', sobrenome) AS nome_completo FROM clientes;` |
+| **LEFT** | Retorna os primeiros caracteres de uma string | `SELECT LEFT(nome, 3) AS inicio_nome FROM clientes;` |
+| **RIGHT** | Retorna os últimos caracteres de uma string | `SELECT RIGHT(nome, 3) AS fim_nome FROM clientes;` |
+| **REPLACE** | Substitui parte de uma string | `SELECT REPLACE(nome, 'a', 'X') AS nome_modificado FROM clientes;` |
+| **TRANSLATE** | Substitui múltiplos caracteres | `SELECT TRANSLATE(nome, 'aeiou', '12345') AS nome_codificado FROM clientes;` |
+| **STUFF** | Remove e insere texto em uma string | `SELECT STUFF('SQL Server', 5, 3, 'Express') AS resultado;` |
+| **UPPER** | Converte para maiúsculas | `SELECT UPPER(nome) AS nome_maiusculo FROM clientes;` |
+| **LOWER** | Converte para minúsculas | `SELECT LOWER(nome) AS nome_minusculo FROM clientes;` |
+| **FORMAT** | Formata valores (datas, números) | `SELECT FORMAT(GETDATE(), 'dd/MM/yyyy') AS data_formatada;` |
+| **CHARINDEX** | Encontra a posição de um caractere em uma string | `SELECT CHARINDEX('a', nome) AS posicao FROM clientes;` |
+| **SUBSTRING** | Extrai parte de uma string | `SELECT SUBSTRING(nome, 2, 3) AS trecho FROM clientes;` |
+| **TRIM** | Remove espaços em branco das extremidades | `SELECT TRIM(nome) AS nome_sem_espacos FROM clientes;` |
+| **LTRIM** | Remove espaços à esquerda | `SELECT LTRIM(nome) AS nome_sem_espacos_inicio FROM clientes;` |
+| **RTRIM** | Remove espaços à direita | `SELECT RTRIM(nome) AS nome_sem_espacos_fim FROM clientes;` |
+| **DAY** | Extrai o dia de uma data | `SELECT DAY(data_nascimento) AS dia FROM clientes;` |
+| **MONTH** | Extrai o mês de uma data | `SELECT MONTH(data_nascimento) AS mes FROM clientes;` |
+| **YEAR** | Extrai o ano de uma data | `SELECT YEAR(data_nascimento) AS ano FROM clientes;` |
+| **DATEFROMPARTS** | Cria uma data a partir de partes | `SELECT DATEFROMPARTS(2024, 7, 9) AS data_completa;` |
+| **GETDATE** | Retorna a data e hora atuais | `SELECT GETDATE() AS agora;` |
+| **SYSDATETIME** | Retorna a data e hora atuais com maior precisão | `SELECT SYSDATETIME() AS agora_preciso;` |
+| **DATEPART** | Retorna uma parte específica da data | `SELECT DATEPART(YEAR, GETDATE()) AS ano;` |
+| **DATENAME** | Retorna o nome de uma parte da data | `SELECT DATENAME(MONTH, GETDATE()) AS mes;` |
+| **DATEADD** | Adiciona/subtrai períodos de tempo a uma data | `SELECT DATEADD(DAY, 30, GETDATE()) AS daqui_30_dias;` |
+| **DATEDIFF** | Calcula a diferença entre duas datas | `SELECT DATEDIFF(YEAR, data_nascimento, GETDATE()) AS idade FROM clientes;` |
+
+
 
 ## Seleção de Dados
 | Comando | Descrição | Exemplo |

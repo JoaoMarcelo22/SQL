@@ -46,6 +46,7 @@ A organização do repositório segue a seguinte estrutura:
 Aqui está uma tabela com os principais comandos SQL e suas respectivas descrições:
 ## Comandos SQL e Exemplos
 
+## Funções Condicionais
 | Comando | Descrição | Exemplo |
 |---------|-----------|---------|
 | **CASE WHEN THEN ELSE** | Cria uma estrutura condicional | `SELECT clientesName, CASE WHEN idade >= 18 THEN 'Adulto' ELSE 'Menor' END AS faixa_etaria FROM clientes;` |

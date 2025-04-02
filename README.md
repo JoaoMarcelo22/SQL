@@ -56,6 +56,8 @@ Aqui está uma tabela com os principais comandos SQL e suas respectivas descriç
 | **ISNULL** | Substitui valores `NULL` por um padrão | `SELECT nome, ISNULL(email, 'Sem Email') AS email_corrigido FROM clientes;` |
 
 ## Manipulação de Strings e Datas
+| Comando | Descrição | Exemplo |
+|---------|-----------|---------|
 | **LEN** | Retorna o número de caracteres em uma string | `SELECT LEN(nome) AS tamanho_nome FROM clientes;` |
 | **DATALENGTH** | Retorna o tamanho da string em bytes | `SELECT DATALENGTH(nome) AS bytes_nome FROM clientes;` |
 | **CONCAT** | Concatena strings | `SELECT CONCAT(nome, ' ', sobrenome) AS nome_completo FROM clientes;` |

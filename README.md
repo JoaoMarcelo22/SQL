@@ -46,6 +46,7 @@ A organização do repositório segue a seguinte estrutura:
 Aqui está uma tabela com os principais comandos SQL e suas respectivas descrições:
 ## Comandos SQL e Exemplos
 
+## Funções Condicionais
 | Comando | Descrição | Exemplo |
 |---------|-----------|---------|
 | **CASE WHEN THEN ELSE** | Cria uma estrutura condicional | `SELECT clientesName, CASE WHEN idade >= 18 THEN 'Adulto' ELSE 'Menor' END AS faixa_etaria FROM clientes;` |
@@ -54,6 +55,10 @@ Aqui está uma tabela com os principais comandos SQL e suas respectivas descriç
 | **IIF** | Alternativa ao `CASE`, retorna um valor baseado em uma condição (SQL Server) | `SELECT IIF(idade >= 18, 'Adulto', 'Menor') AS faixa_etaria FROM clientes;` |
 | **IIF COMPOSTO** | `IIF` com múltiplas condições encadeadas | `SELECT IIF(idade >= 60, 'Idoso', IIF(idade >= 18, 'Adulto', 'Menor')) AS faixa_etaria FROM clientes;` |
 | **ISNULL** | Substitui valores `NULL` por um padrão | `SELECT nome, ISNULL(email, 'Sem Email') AS email_corrigido FROM clientes;` |
+
+## Manipulação de Strings e Datas
+| Comando | Descrição | Exemplo |
+|---------|-----------|---------|
 | **LEN** | Retorna o número de caracteres em uma string | `SELECT LEN(nome) AS tamanho_nome FROM clientes;` |
 | **DATALENGTH** | Retorna o tamanho da string em bytes | `SELECT DATALENGTH(nome) AS bytes_nome FROM clientes;` |
 | **CONCAT** | Concatena strings | `SELECT CONCAT(nome, ' ', sobrenome) AS nome_completo FROM clientes;` |
@@ -80,8 +85,6 @@ Aqui está uma tabela com os principais comandos SQL e suas respectivas descriç
 | **DATENAME** | Retorna o nome de uma parte da data | `SELECT DATENAME(MONTH, GETDATE()) AS mes;` |
 | **DATEADD** | Adiciona/subtrai períodos de tempo a uma data | `SELECT DATEADD(DAY, 30, GETDATE()) AS daqui_30_dias;` |
 | **DATEDIFF** | Calcula a diferença entre duas datas | `SELECT DATEDIFF(YEAR, data_nascimento, GETDATE()) AS idade FROM clientes;` |
-
-
 
 ## Seleção de Dados
 | Comando | Descrição | Exemplo |

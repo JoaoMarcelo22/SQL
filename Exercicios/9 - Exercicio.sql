@@ -35,9 +35,21 @@ CATEGORIA C: Menos de 100 produtos
 Faça uma consulta à tabela DimProduct e retorne uma tabela com um agrupamento de Total de Produtos por Marca, além da coluna de Categoria, conforme a regra acima.
 */
 select
-	
+	BrandName as 'Empresa',
+	Count(ProductName) as 'Qtd Produtos',
+	iif(
+		Count(ProductName) > 500,
+		'Mais de 500 produtos',
+		iif(
+			Count(ProductName) >= 100,
+			'Entre 100 e 500 produtos',
+			'Menos de 100 produtos'
+		)
+	) as 'Categoria'
 from
 	DimProduct
+group by BrandName
+order by [Qtd Produtos] desc
 
 
 /*
@@ -65,3 +77,80 @@ select
 	end as 'Tamanho da Loja'
 from	
 	DimStore
+
+/*
+4. O setor de logística deverá realizar um transporte de carga dos produtos que estão no depósito de Seattle para o depósito de Sunnyside.
+
+Não se tem muitas informações sobre os produtos que estão no depósito, apenas se sabe que existem 100 exemplares de cada Subcategoria. Ou seja, 100 laptops, 100 câmeras digitais, 100 ventiladores, e assim vai.
+
+O gerente de logística definiu que os produtos serão transportados por duas rotas distintas. Além disso, a divisão dos produtos em cada uma das rotas será feita de acordo com as subcategorias (ou seja, todos os produtos de uma mesma subcategoria serão transportados pela mesma rota):
+
+Rota 1: As subcategorias que tiverem uma soma total menor que 1000 kg deverão ser transportados pela Rota 1.
+
+Rota 2: As subcategorias que tiverem uma soma total maior ou igual a 1000 kg deverão ser transportados pela Rota 2.
+
+Você deverá realizar uma consulta à tabela DimProduct e fazer essa divisão das subcategorias por cada rota. Algumas dicas:
+
+- Dica 1: A sua consulta deverá ter um total de 3 colunas: Nome da Subcategoria, Peso Total e Rota.
+
+- Dica 2: Como não se sabe quais produtos existem no depósito, apenas que existem 100 exemplares de cada subcategoria, você deverá descobrir o peso médio de cada subcategoria e multiplicar essa média por 100, de forma que você descubra aproximadamente qual é o peso total dos produtos por subcategoria.
+
+- Dica 3: Sua resposta final deverá ter um JOIN e um GROUP BY.
+*/
+select
+	ProductSubcategoryName as 'Subcatetegoria',
+	round(avg(Weight) * 100,0) as 'Peso Total',
+	iif(
+			round(avg(Weight) * 100,0) >= 1000,
+			'Rota 2',
+			'Rota 1'
+		) as 'Rota'
+from
+	DimProduct
+inner join DimProductSubcategory
+	on DimProduct.ProductSubcategoryKey = DimProductSubcategory.ProductSubcategoryKey
+where Weight is not null
+group by ProductSubcategoryName
+order by [Peso Total] desc
+
+/*
+5. O setor de marketing está com algumas ideias de ações para alavancar as vendas em 2021. Uma delas consiste em realizar sorteios entre os clientes da empresa.
+Este sorteio será dividido em categorias:
+‘Sorteio Mãe do Ano’: Nessa categoria vão participar todas as mulheres com filhos.
+‘Sorteio Pai do Ano’: Nessa categoria vão participar todos os pais com filhos.
+‘Caminhão de Prêmios’: Nessa categoria vão participar todas os demais clientes (homens e mulheres sem filhos).
+Seu papel será realizar uma consulta à tabela DimCustomer e retornar 3 colunas:
+- FirstName AS ‘Nome’
+- Gender AS ‘Sexo’
+- TotalChildren AS ‘Qtd. Filhos’
+- EmailAdress AS ‘E-mail’
+- Ação de Marketing: nessa coluna você deverá dividir os clientes de acordo com as categorias ‘Sorteio Mãe do Ano’, ‘Sorteio Pai do Ano’ e ‘Caminhão de Prêmios’.
+*/
+
+select
+	FirstName as 'Nome',
+	Gender as 'Sexo',
+	TotalChildren as 'Qtd. Filhos',
+	EmailAddress as 'E-mail',
+	case
+		when Gender = 'F' and TotalChildren > 1 then 'Sorteio Mãe do Ano'
+		when Gender = 'M' and TotalChildren > 1 then 'Sorteio Pai do Ano'
+		else 'Caminhão de Prêmios'
+	end as 'Ctg. Sorteio'
+from
+	DimCustomer
+
+/*
+6. Descubra qual é a loja que possui o maior tempo de atividade (em dias). Você deverá fazer essa consulta na tabela DimStore, e considerar a coluna OpenDate como referência para esse cálculo.
+Atenção: lembre-se que existem lojas que foram fechadas.
+*/
+
+select
+	top(1)
+	StoreName as 'Loja',
+	DATEDIFF(DAY,OpenDate,GETDATE()) as 'Tempo de atividade'
+from
+	DimStore
+where CloseDate is null
+group by StoreName,OpenDate
+order by [Tempo de atividade] desc

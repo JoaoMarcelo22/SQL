@@ -40,13 +40,13 @@ go
 go
 create view vwClientes as
 select
-	FirstName + ' ' + LastName as 'Nome',
+	concat(FirstName , ' ' , LastName) as 'Nome',
 	iif( Gender = 'F', 
 		'Feminino',
 		'Masculino'
 	) as 'Sexo',
 	EmailAddress as  'E-mail',
-	'R$: '+ cast(YearlyIncome as varchar) as 'Renda Anual'
+	format(YearlyIncome, 'C') as 'Renda Anual'
 
 from
 	DimCustomer
@@ -94,13 +94,15 @@ OBS: Para isso, você terá que utilizar um JOIN para relacionar as tabelas FactSa
 go
 create view vwTotalVendidoProdutos as
 select
-	SalesQuantity as 'Qtd. Total Vendido',
+	sum(SalesQuantity) as 'Qtd. Total Vendido',
 	ProductName as 'Nome do produto'
 from
 	FactSales
 inner join DimProduct
 	on FactSales.ProductKey = DimProduct.ProductKey
+group by ProductName
 go
+
 /*
 5. Faça as seguintes alterações nas tabelas da questão 1.
 a. Na View criada na letra a da questão 1, adicione a coluna de BrandName.
@@ -111,7 +113,7 @@ c. Na View criada na letra c da questão 1, faça uma alteração e filtre apenas as
 go
 alter view vwProdutos as
 select
-	BrandName as 'Loja',
+	BrandName as 'Marca',
 	ProductName as 'Nome do produto',
 	ColorName as 'Cor',
 	UnitPrice as 'Preço unitario',

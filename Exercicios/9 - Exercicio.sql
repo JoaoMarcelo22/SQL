@@ -133,8 +133,8 @@ select
 	TotalChildren as 'Qtd. Filhos',
 	EmailAddress as 'E-mail',
 	case
-		when Gender = 'F' and TotalChildren > 1 then 'Sorteio Mãe do Ano'
-		when Gender = 'M' and TotalChildren > 1 then 'Sorteio Pai do Ano'
+		when Gender = 'F' and TotalChildren > 0 then 'Sorteio Mãe do Ano'
+		when Gender = 'M' and TotalChildren > 0 then 'Sorteio Pai do Ano'
 		else 'Caminhão de Prêmios'
 	end as 'Ctg. Sorteio'
 from
@@ -146,11 +146,14 @@ Atenção: lembre-se que existem lojas que foram fechadas.
 */
 
 select
-	top(1)
 	StoreName as 'Loja',
-	DATEDIFF(DAY,OpenDate,GETDATE()) as 'Tempo de atividade'
+	OpenDate as 'Abertura',
+	CloseDate as 'Fechamento',
+	case	
+		when CloseDate is null then DATEDIFF(DAY,OpenDate,GETDATE())
+		else DATEDIFF(DAY,OpenDate,CloseDate) 
+	end as 'Tempo de atividade'
 from
 	DimStore
-where CloseDate is null
-group by StoreName,OpenDate
+group by StoreName,OpenDate,CloseDate
 order by [Tempo de atividade] desc

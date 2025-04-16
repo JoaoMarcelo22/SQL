@@ -56,10 +56,6 @@ Aqui está uma tabela com os principais comandos SQL e suas respectivas descriç
 | `IIF COMPOSTO` | `IIF` com múltiplas condições encadeadas | `SELECT IIF(idade >= 60, 'Idoso', IIF(idade >= 18, 'Adulto', 'Menor')) AS faixa_etaria FROM clientes;` |
 | `ISNULL` | Substitui valores `NULL` por um padrão | `SELECT nome, ISNULL(email, 'Sem Email') AS email_corrigido FROM clientes;` |
 
-## Manipulação de Strings e Datas
-| Comando | Descrição | Exemplo |
-|---------|-----------|---------|
-
 ## Seleção de Dados
 | Comando | Descrição | Exemplo |
 |---------|-----------|---------|

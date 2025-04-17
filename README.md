@@ -45,16 +45,6 @@ A organização do repositório segue a seguinte estrutura:
 
 Aqui está uma tabela com os principais comandos SQL e suas respectivas descrições:
 
-## Funções Condicionais
-| Comando | Descrição | Exemplo |
-|---------|-----------|---------|
-| `CASE WHEN THEN ELSE` | Cria uma estrutura condicional | `SELECT clientesName, CASE WHEN idade >= 18 THEN 'Adulto' ELSE 'Menor' END AS faixa_etaria FROM clientes;` |
-| `CASE ADITIVO` | Verifica múltiplas condições sem `WHEN` repetido | `SELECT categoria, CASE categoria WHEN 'A' THEN 'Alta' WHEN 'B' THEN 'Média' ELSE 'Baixa' END AS prioridade FROM pedidos;` |
-| `CASE ANINHADO` | Um `CASE` dentro de outro `CASE` | `SELECT nome, CASE WHEN salario > 5000 THEN 'Alto' WHEN salario BETWEEN 3000 AND 5000 THEN CASE WHEN tempo_servico > 5 THEN 'Médio-Alto' ELSE 'Médio' END ELSE 'Baixo' END AS classificacao FROM funcionarios;` |
-| `IIF` | Alternativa ao `CASE`, retorna um valor baseado em uma condição (SQL Server) | `SELECT IIF(idade >= 18, 'Adulto', 'Menor') AS faixa_etaria FROM clientes;` |
-| `IIF COMPOSTO` | `IIF` com múltiplas condições encadeadas | `SELECT IIF(idade >= 60, 'Idoso', IIF(idade >= 18, 'Adulto', 'Menor')) AS faixa_etaria FROM clientes;` |
-| `ISNULL` | Substitui valores `NULL` por um padrão | `SELECT nome, ISNULL(email, 'Sem Email') AS email_corrigido FROM clientes;` |
-
 ## Seleção de Dados
 | Comando | Descrição | Exemplo |
 |---------|-----------|---------|
@@ -71,6 +61,16 @@ Aqui está uma tabela com os principais comandos SQL e suas respectivas descriç
 | `BETWEEN` | Filtra resultados dentro de um range | `SELECT * FROM usuarios WHERE idade BETWEEN 10 AND 50;` |
 | `LIKE` | Filtra resultados que correspondem a um padrão | `SELECT * FROM usuarios WHERE nome LIKE 'J%';` |
 | `IS NULL/ IS NOT NULL` | Filtra resultados que são nulos ou não nulos | `SELECT * FROM usuarios WHERE nome IS NOT NULL;` |
+
+## Funções Condicionais
+| Comando | Descrição | Exemplo |
+|---------|-----------|---------|
+| `CASE WHEN THEN ELSE` | Cria uma estrutura condicional | `SELECT clientesName, CASE WHEN idade >= 18 THEN 'Adulto' ELSE 'Menor' END AS faixa_etaria FROM clientes;` |
+| `CASE ADITIVO` | Verifica múltiplas condições sem `WHEN` repetido | `SELECT categoria, CASE categoria WHEN 'A' THEN 'Alta' WHEN 'B' THEN 'Média' ELSE 'Baixa' END AS prioridade FROM pedidos;` |
+| `CASE ANINHADO` | Um `CASE` dentro de outro `CASE` | `SELECT nome, CASE WHEN salario > 5000 THEN 'Alto' WHEN salario BETWEEN 3000 AND 5000 THEN CASE WHEN tempo_servico > 5 THEN 'Médio-Alto' ELSE 'Médio' END ELSE 'Baixo' END AS classificacao FROM funcionarios;` |
+| `IIF` | Alternativa ao `CASE`, retorna um valor baseado em uma condição (SQL Server) | `SELECT IIF(idade >= 18, 'Adulto', 'Menor') AS faixa_etaria FROM clientes;` |
+| `IIF COMPOSTO` | `IIF` com múltiplas condições encadeadas | `SELECT IIF(idade >= 60, 'Idoso', IIF(idade >= 18, 'Adulto', 'Menor')) AS faixa_etaria FROM clientes;` |
+| `ISNULL` | Substitui valores `NULL` por um padrão | `SELECT nome, ISNULL(email, 'Sem Email') AS email_corrigido FROM clientes;` |
 
 ## Ordenação e Agrupamento
 | Comando | Descrição | Exemplo |

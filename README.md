@@ -16,15 +16,15 @@ A organização do repositório segue a seguinte estrutura:
 /
 ├── 📜 README.md  # Documento principal com explicações
 ├── 📂 Exercicios  # Scripts SQL para prática
-│   ├── basico.sql
-│   ├── intermediario.sql
-│   ├── avancado.sql
-│   └── desafios.sql
+│   ├── 1- Exercicio.sql
+│   ├── 2- Exercicio.sql
+│   ├── 3- Exercicio.sql
+│   └── 4- Exercicio.sql
 ├── 📂 Materiais  # PDFs com teoria,dicas,Casos práticos e consultas comentadas
-    ├── fundamentos_sql.pdf
-    ├── joins_relacoes.pdf
-    ├── performance_otimizacao.pdf
-    └── modelagem_dados.pdf
+    ├── 10 - [SQL Server] Views no SQL Server - Explicação Exercícios - Módulo 13 - Lista de Exercícios.pdf
+    ├── 9 - [SQL Server] Funções Condicionais no SQL Server - Explicação Exercícios - Módulo 12 - Lista de Exercícios.pdf
+    ├── 8 - [SQL Server] Strings e Datas no SQL Server - Explicação Exercícios - Módulo 11 - Lista de Exercícios.pdf
+    └── 7 - SQL Server - Lista de Exercícios - Variáveis.pdf
 ```
 
 ---
@@ -44,7 +44,6 @@ A organização do repositório segue a seguinte estrutura:
 ## 📖 Comandos SQL Essenciais
 
 Aqui está uma tabela com os principais comandos SQL e suas respectivas descrições:
-## Comandos SQL e Exemplos
 
 ## Funções Condicionais
 | Comando | Descrição | Exemplo |

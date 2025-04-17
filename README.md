@@ -62,6 +62,13 @@ Aqui está uma tabela com os principais comandos SQL e suas respectivas descriç
 | `LIKE` | Filtra resultados que correspondem a um padrão | `SELECT * FROM usuarios WHERE nome LIKE 'J%';` |
 | `IS NULL/ IS NOT NULL` | Filtra resultados que são nulos ou não nulos | `SELECT * FROM usuarios WHERE nome IS NOT NULL;` |
 
+## Ordenação e Agrupamento
+| Comando | Descrição | Exemplo |
+|---------|-----------|---------|
+| `ORDER BY` | Ordena os resultados da consulta | `SELECT * FROM produtos ORDER BY preco DESC;` |
+| `GROUP BY` | Agrupa resultados por um ou mais campos | `SELECT categoria, COUNT(*) FROM produtos GROUP BY categoria;` |
+| `HAVING` | Filtra os resultados de uma agregação | `SELECT categoria, COUNT(*) FROM produtos GROUP BY categoria HAVING COUNT(*) > 10;` |
+
 ## Funções Condicionais
 | Comando | Descrição | Exemplo |
 |---------|-----------|---------|
@@ -71,13 +78,6 @@ Aqui está uma tabela com os principais comandos SQL e suas respectivas descriç
 | `IIF` | Alternativa ao `CASE`, retorna um valor baseado em uma condição (SQL Server) | `SELECT IIF(idade >= 18, 'Adulto', 'Menor') AS faixa_etaria FROM clientes;` |
 | `IIF COMPOSTO` | `IIF` com múltiplas condições encadeadas | `SELECT IIF(idade >= 60, 'Idoso', IIF(idade >= 18, 'Adulto', 'Menor')) AS faixa_etaria FROM clientes;` |
 | `ISNULL` | Substitui valores `NULL` por um padrão | `SELECT nome, ISNULL(email, 'Sem Email') AS email_corrigido FROM clientes;` |
-
-## Ordenação e Agrupamento
-| Comando | Descrição | Exemplo |
-|---------|-----------|---------|
-| `ORDER BY` | Ordena os resultados da consulta | `SELECT * FROM produtos ORDER BY preco DESC;` |
-| `GROUP BY` | Agrupa resultados por um ou mais campos | `SELECT categoria, COUNT(*) FROM produtos GROUP BY categoria;` |
-| `HAVING` | Filtra os resultados de uma agregação | `SELECT categoria, COUNT(*) FROM produtos GROUP BY categoria HAVING COUNT(*) > 10;` |
 
 ## Junção de Tabelas
 | Comando | Descrição | Exemplo |

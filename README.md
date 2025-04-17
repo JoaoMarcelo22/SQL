@@ -69,15 +69,15 @@ Aqui está uma tabela com os principais comandos SQL e suas respectivas descriç
 | `GROUP BY` | Agrupa resultados por um ou mais campos | `SELECT categoria, COUNT(*) FROM produtos GROUP BY categoria;` |
 | `HAVING` | Filtra os resultados de uma agregação | `SELECT categoria, COUNT(*) FROM produtos GROUP BY categoria HAVING COUNT(*) > 10;` |
 
-## Funções Condicionais
-| Comando | Descrição | Exemplo |
-|---------|-----------|---------|
-| `CASE WHEN THEN ELSE` | Cria uma estrutura condicional | `SELECT clientesName, CASE WHEN idade >= 18 THEN 'Adulto' ELSE 'Menor' END AS faixa_etaria FROM clientes;` |
-| `CASE ADITIVO` | Verifica múltiplas condições sem `WHEN` repetido | `SELECT categoria, CASE categoria WHEN 'A' THEN 'Alta' WHEN 'B' THEN 'Média' ELSE 'Baixa' END AS prioridade FROM pedidos;` |
-| `CASE ANINHADO` | Um `CASE` dentro de outro `CASE` | `SELECT nome, CASE WHEN salario > 5000 THEN 'Alto' WHEN salario BETWEEN 3000 AND 5000 THEN CASE WHEN tempo_servico > 5 THEN 'Médio-Alto' ELSE 'Médio' END ELSE 'Baixo' END AS classificacao FROM funcionarios;` |
-| `IIF` | Alternativa ao `CASE`, retorna um valor baseado em uma condição (SQL Server) | `SELECT IIF(idade >= 18, 'Adulto', 'Menor') AS faixa_etaria FROM clientes;` |
-| `IIF COMPOSTO` | `IIF` com múltiplas condições encadeadas | `SELECT IIF(idade >= 60, 'Idoso', IIF(idade >= 18, 'Adulto', 'Menor')) AS faixa_etaria FROM clientes;` |
-| `ISNULL` | Substitui valores `NULL` por um padrão | `SELECT nome, ISNULL(email, 'Sem Email') AS email_corrigido FROM clientes;` |
+## Funções de Agregação
+| Função | Descrição | Exemplo |
+|--------|-----------|---------|
+| `SUM` | Soma os valores de uma coluna numérica | `SELECT SUM(preco) FROM produtos;` |
+| `COUNT` | Conta o número de linhas | `SELECT COUNT(*) FROM produtos;` |
+| `COUNT(DISTINCT ...)` | Conta valores distintos em uma coluna | `SELECT COUNT(DISTINCT categoria) FROM produtos;` |
+| `MIN` | Retorna o menor valor de uma coluna | `SELECT MIN(preco) FROM produtos;` |
+| `MAX` | Retorna o maior valor de uma coluna | `SELECT MAX(preco) FROM produtos;` |
+| `AVG` | Calcula a média dos valores de uma coluna | `SELECT AVG(preco) FROM produtos;` |
 
 ## Junção de Tabelas
 | Comando | Descrição | Exemplo |
@@ -90,21 +90,18 @@ Aqui está uma tabela com os principais comandos SQL e suas respectivas descriç
 | `CROSS JOIN` | Retorna todos os registros para todas as colunas (replica os valores) | `SELECT * FROM clientes CROSS JOIN pedidos;` |
 | `UNION` | Une duas tabelas | `SELECT * FROM FactOnlineSales UNION SELECT * FROM FactStoreSales ORDER BY DataVenda DESC;` |
 
-## Manipulação de Dados
-| Comando | Descrição | Exemplo |
-|---------|-----------|---------|
-| `INSERT` | Insere novos registros na tabela | `INSERT INTO produtos (nome, preco) VALUES ('Mouse', 50);` |
-| `UPDATE` | Atualiza registros existentes | `UPDATE produtos SET preco = 60 WHERE nome = 'Mouse';` |
-| `DELETE` | Remove registros de uma tabela | `DELETE FROM produtos WHERE preco < 10;` |
-| `CAST`| Converte um tipo de dado para outro | `SELECT CAST(123.45 AS INT);`|
-
-## Estruturas e Modificação de Tabelas
-| Comando | Descrição | Exemplo |
-|---------|-----------|---------|
-| `CREATE TABLE` | Cria uma nova tabela no banco de dados | `CREATE TABLE clientes (id INT, nome VARCHAR(100));` |
-| `ALTER TABLE` | Modifica a estrutura de uma tabela | `ALTER TABLE clientes ADD COLUMN email VARCHAR(100);` |
-| `DROP TABLE` | Remove uma tabela do banco de dados | `DROP TABLE clientes;` |
-| `TRUNCATE TABLE` | Apaga todos os registros de uma tabela | `TRUNCATE TABLE pedidos;` |
+## Tipos e Variáveis
+| Comando/Função | Descrição | Exemplo |
+|----------------|-----------|---------|
+| `CAST` | Converte um valor de um tipo para outro | `SELECT CAST(preco AS INT) FROM produtos;` |
+| `FORMAT` | Formata um valor com base em uma máscara | `SELECT FORMAT(getdate(), 'dd/MM/yyyy');` |
+| `ROUND` | Arredonda um número para um número específico de casas decimais | `SELECT ROUND(preco, 2) FROM produtos;` |
+| `FLOOR` | Arredonda um número para baixo | `SELECT FLOOR(preco) FROM produtos;` |
+| `CEILING` | Arredonda um número para cima | `SELECT CEILING(preco) FROM produtos;` |
+| `DECLARE` | Declara uma variável | `DECLARE @nome VARCHAR(50);` |
+| `SET` | Atribui um valor a uma variável | `SET @nome = 'Produto X';` |
+| `DECLARE` + `SET` múltiplas | Declara e define várias variáveis | `DECLARE @a INT = 10, @b INT = 20;` |
+| `SQL_VARIANT_PROPERTY` | Retorna propriedades de um valor do tipo `sql_variant` | `SELECT SQL_VARIANT_PROPERTY(CAST(123 AS sql_variant), 'BaseType');` |
 
 ## Manipulação de Strings
 | Comando | Descrição | Exemplo |
@@ -139,6 +136,53 @@ Aqui está uma tabela com os principais comandos SQL e suas respectivas descriç
 | `SYSDATETIME` | Retorna a data e hora atuais com maior precisão | `SELECT SYSDATETIME() AS agora_preciso;` |
 | `DATEPART` | Retorna uma parte específica da data | `SELECT DATEPART(YEAR, GETDATE()) AS ano;` |
 | `DATENAME` | Retorna o nome de uma parte da data | `SELECT DATENAME(MONTH, GETDATE()) AS mes;` |
+
+## Funções Condicionais
+| Comando | Descrição | Exemplo |
+|---------|-----------|---------|
+| `CASE WHEN THEN ELSE` | Cria uma estrutura condicional | `SELECT clientesName, CASE WHEN idade >= 18 THEN 'Adulto' ELSE 'Menor' END AS faixa_etaria FROM clientes;` |
+| `CASE ADITIVO` | Verifica múltiplas condições sem `WHEN` repetido | `SELECT categoria, CASE categoria WHEN 'A' THEN 'Alta' WHEN 'B' THEN 'Média' ELSE 'Baixa' END AS prioridade FROM pedidos;` |
+| `CASE ANINHADO` | Um `CASE` dentro de outro `CASE` | `SELECT nome, CASE WHEN salario > 5000 THEN 'Alto' WHEN salario BETWEEN 3000 AND 5000 THEN CASE WHEN tempo_servico > 5 THEN 'Médio-Alto' ELSE 'Médio' END ELSE 'Baixo' END AS classificacao FROM funcionarios;` |
+| `IIF` | Alternativa ao `CASE`, retorna um valor baseado em uma condição (SQL Server) | `SELECT IIF(idade >= 18, 'Adulto', 'Menor') AS faixa_etaria FROM clientes;` |
+| `IIF COMPOSTO` | `IIF` com múltiplas condições encadeadas | `SELECT IIF(idade >= 60, 'Idoso', IIF(idade >= 18, 'Adulto', 'Menor')) AS faixa_etaria FROM clientes;` |
+| `ISNULL` | Substitui valores `NULL` por um padrão | `SELECT nome, ISNULL(email, 'Sem Email') AS email_corrigido FROM clientes;` |
+
+## Comandos com Views e Uso de Banco de Dados
+| Comando | Descrição | Exemplo |
+|---------|-----------|---------|
+| `CREATE VIEW` | Cria uma view (visão) com base em uma consulta | `CREATE VIEW vw_produtos_caros AS SELECT * FROM produtos WHERE preco > 100;` |
+| `USE` | Define o banco de dados atual para execução de comandos | `USE loja_virtual;` |
+| `ALTER VIEW` | Altera a definição de uma view existente | `ALTER VIEW vw_produtos_caros AS SELECT nome, preco FROM produtos WHERE preco > 200;` |
+| `DROP VIEW` | Remove uma view do banco de dados | `DROP VIEW vw_produtos_caros;` |
+
+## Estruturas e Modificação de Tabelas
+| Comando | Descrição | Exemplo |
+|---------|-----------|---------|
+| `CREATE TABLE` | Cria uma nova tabela no banco de dados | `CREATE TABLE clientes (id INT, nome VARCHAR(100));` |
+| `ALTER TABLE` | Modifica a estrutura de uma tabela | `ALTER TABLE clientes ADD COLUMN email VARCHAR(100);` |
+| `DROP TABLE` | Remove uma tabela do banco de dados | `DROP TABLE clientes;` |
+| `TRUNCATE TABLE` | Apaga todos os registros de uma tabela | `TRUNCATE TABLE pedidos;` |
+
+## Manipulação de Dados
+| Comando | Descrição | Exemplo |
+|---------|-----------|---------|
+| `INSERT` | Insere novos registros na tabela | `INSERT INTO produtos (nome, preco) VALUES ('Mouse', 50);` |
+| `UPDATE` | Atualiza registros existentes | `UPDATE produtos SET preco = 60 WHERE nome = 'Mouse';` |
+| `DELETE` | Remove registros de uma tabela | `DELETE FROM produtos WHERE preco < 10;` |
+| `CAST`| Converte um tipo de dado para outro | `SELECT CAST(123.45 AS INT);`|
+
+## Manipulação de Banco de Dados e Tabelas
+| Comando | Descrição | Exemplo |
+|---------|-----------|---------|
+| `CREATE DATABASE` | Cria um novo banco de dados | `CREATE DATABASE loja_virtual;` |
+| `DROP DATABASE` | Exclui um banco de dados existente | `DROP DATABASE loja_virtual;` |
+| `CREATE TABLE` | Cria uma nova tabela | `CREATE TABLE produtos (id INT, nome VARCHAR(100), preco DECIMAL(10,2));` |
+| `INSERT INTO` | Insere dados diretamente na tabela | `INSERT INTO produtos (id, nome, preco) VALUES (1, 'Notebook', 3500.00);` |
+| `INSERT SELECT` | Insere dados com base no resultado de uma consulta | `INSERT INTO produtos_backup SELECT * FROM produtos;` |
+| `UPDATE` | Atualiza dados existentes na tabela | `UPDATE produtos SET preco = 4000 WHERE id = 1;` |
+| `DELETE` | Remove linhas da tabela | `DELETE FROM produtos WHERE preco < 100;` |
+| `DROP TABLE` | Exclui uma tabela existente | `DROP TABLE produtos_backup;` |
+| `ALTER TABLE` | Altera a estrutura de uma tabela | `ALTER TABLE produtos ADD estoque INT;` |
 
 ---
 
